@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/features/category/models/category_model.dart';
-import 'package:news_app/features/category/views/category_view.dart';
+import 'package:news_app/core/navigation/app_routes.dart';
+import 'package:news_app/core/navigation/navigation_helpers.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({super.key, required this.category});
@@ -15,12 +16,9 @@ class CategoryCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) {
-              return CategoryView(category: category.categoryName);
-            },
-          ),
+        context.pushNamed(
+          AppRoutes.categoryView,
+          arguments: category.categoryName,
         );
       },
       child: Padding(

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/core/theme/theme_cubit.dart';
 import 'package:news_app/features/auth/cubit/auth_cubit.dart';
-import 'package:news_app/features/auth/views/login_screen.dart';
+import 'package:news_app/core/navigation/app_routes.dart';
+import 'package:news_app/core/navigation/navigation_helpers.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -109,11 +110,8 @@ class AccountScreen extends StatelessWidget {
                         await authCubit.logout();
                         if (!context.mounted) return;
 
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const LoginScreen(),
-                          ),
+                        context.pushNamedAndRemoveUntil(
+                          AppRoutes.login,
                           (route) => false,
                         );
                       },

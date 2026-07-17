@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/core/models/article_model.dart';
 import 'package:news_app/features/favorite/cubit/favorite_cubit.dart';
 import 'package:news_app/features/favorite/cubit/favorite_states.dart';
-import 'package:news_app/features/home/views/article_web_view.dart';
+import 'package:news_app/core/navigation/app_routes.dart';
+import 'package:news_app/core/navigation/navigation_helpers.dart';
 
 class NewsTitle extends StatelessWidget {
   const NewsTitle({super.key, required this.articleModel});
@@ -17,15 +18,12 @@ class NewsTitle extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (articleModel.url != null && articleModel.url!.isNotEmpty) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder:
-                  (context) => ArticleWebView(
-                    url: articleModel.url!,
-                    title: articleModel.subtitle ?? '',
-                  ),
-            ),
+          context.pushNamed(
+            AppRoutes.articleWebView,
+            arguments: {
+              'url': articleModel.url!,
+              'title': articleModel.subtitle ?? '',
+            },
           );
         }
       },

@@ -4,7 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:news_app/core/widgets/custom_textfield.dart';
 import 'package:news_app/features/auth/cubit/auth_cubit.dart';
 import 'package:news_app/features/auth/cubit/auth_states.dart';
-import 'package:news_app/features/auth/views/login_screen.dart';
+import 'package:news_app/core/navigation/app_routes.dart';
+import 'package:news_app/core/navigation/navigation_helpers.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -72,9 +73,7 @@ class _SignupScreenState extends State<SignupScreen> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is AuthSignUpSuccess) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const LoginScreen()),
-          );
+          context.pushNamedAndRemoveUntil(AppRoutes.navBar, (route) => false);
         }
 
         if (state is AuthError) {
@@ -96,7 +95,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   size: 18,
                   color: theme.iconTheme.color,
                 ),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => context.pop(),
               ),
             ),
             title: Align(
@@ -267,11 +266,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => const LoginScreen(),
-                                    ),
-                                  );
+                                  context.pushNamed(AppRoutes.login);
                                 },
                                 child: Text(
                                   "Login",

@@ -4,9 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:news_app/core/widgets/custom_textfield.dart';
 import 'package:news_app/features/auth/cubit/auth_cubit.dart';
 import 'package:news_app/features/auth/cubit/auth_states.dart';
-import 'package:news_app/features/auth/views/signup_screen.dart';
+import 'package:news_app/core/navigation/app_routes.dart';
+import 'package:news_app/core/navigation/navigation_helpers.dart';
 import 'package:news_app/features/favorite/cubit/favorite_cubit.dart';
-import 'package:news_app/features/home/views/navbar_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -61,9 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
         if (state is AuthloginSuccess) {
           context.read<FavoriteCubit>().getFavorites();
 
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const NavBar()),
-          );
+          context.pushNamedAndRemoveUntil(AppRoutes.navBar, (route) => false);
         }
 
         if (state is AuthError) {
@@ -85,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   size: 18,
                   color: theme.iconTheme.color,
                 ),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => context.pop(),
               ),
             ),
             title: Align(
@@ -259,12 +257,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder:
-                                          (context) => const SignupScreen(),
-                                    ),
-                                  );
+                                  context.pushNamed(AppRoutes.signup);
                                 },
                                 child: Text(
                                   "Sign up",

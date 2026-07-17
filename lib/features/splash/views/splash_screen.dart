@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/features/auth/views/login_screen.dart';
-import 'package:news_app/features/auth/views/signup_screen.dart';
+import 'package:news_app/core/navigation/app_routes.dart';
+import 'package:news_app/core/navigation/navigation_helpers.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -51,10 +51,9 @@ class SplashScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
-                            ),
+                          context.pushNamedAndRemoveUntil(
+                            AppRoutes.login,
+                            (route) => false,
                           );
                         },
                         child: Text(
@@ -80,10 +79,9 @@ class SplashScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const SignupScreen(),
-                            ),
+                          context.pushNamedAndRemoveUntil(
+                            AppRoutes.signup,
+                            (route) => false,
                           );
                         },
                         child: Text(

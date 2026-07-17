@@ -12,7 +12,7 @@ import 'package:news_app/features/favorite/cubit/favorite_cubit.dart';
 import 'package:news_app/features/favorite/data/favorite_data_source.dart';
 import 'package:news_app/features/home/cubit/news_cubit.dart';
 import 'package:news_app/features/home/data/news_data_source.dart';
-import 'package:news_app/features/splash/views/splash_screen.dart';
+import 'package:news_app/core/navigation/app_routes.dart';
 import 'package:news_app/firebase_options.dart';
 
 void main() async {
@@ -52,7 +52,8 @@ class NewsApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: context.watch<ThemeCubit>().themeData,
-            home: const SplashScreen(),
+            initialRoute: AppRoutes.splash,
+            onGenerateRoute: AppRoutes.onGenerateRoute,
           );
         },
       ),
