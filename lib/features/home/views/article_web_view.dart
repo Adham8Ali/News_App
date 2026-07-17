@@ -9,13 +9,15 @@ class ArticleWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: theme.colorScheme.primary,
         title: Text(
           title,
-          style: const TextStyle(
-            color: Colors.yellow,
+          style: TextStyle(
+            color: theme.colorScheme.onPrimary,
             fontWeight: FontWeight.bold,
           ),
         ),

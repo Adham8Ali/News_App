@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/model/category_model.dart';
-import 'package:news_app/views/categary_view.dart';
+import 'package:news_app/features/category/models/category_model.dart';
+import 'package:news_app/features/category/views/category_view.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({super.key, required this.category});
@@ -8,6 +8,11 @@ class CategoryCard extends StatelessWidget {
   final CategoryModel category;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final cardHeight = (screenWidth * 0.32).clamp(140.0, 220.0);
+    final cardWidth = (screenWidth * 0.38).clamp(140.0, 180.0);
+
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
@@ -21,22 +26,26 @@ class CategoryCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(right: 10, top: 8, left: 5),
         child: Container(
-          height: 250,
-          width: 170,
+          height: cardHeight,
+          width: cardWidth,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             image: DecorationImage(
               image: AssetImage(category.image),
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
             ),
           ),
           child: Center(
-            child: Text(
-              category.categoryName,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Text(
+                category.categoryName,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: theme.colorScheme.onPrimary,
+                  fontSize: screenWidth < 360 ? 14 : 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

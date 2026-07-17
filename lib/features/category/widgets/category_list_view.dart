@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/model/category_model.dart';
-import 'package:news_app/widgets/category_card.dart';
+import 'package:news_app/features/category/models/category_model.dart';
+import 'package:news_app/features/category/widgets/category_card.dart';
 
 class CategoriesListView extends StatelessWidget {
   CategoriesListView({super.key});
@@ -17,9 +17,13 @@ class CategoriesListView extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final itemHeight = (screenWidth * 0.28).clamp(130.0, 180.0);
+
     return SizedBox(
-      height: 130,
+      height: itemHeight,
       child: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         itemBuilder: (context, index) {
